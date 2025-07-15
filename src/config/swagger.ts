@@ -314,6 +314,165 @@ const options = {
             success: { type: 'boolean', example: false },
             message: { type: 'string', example: 'Tenant with DNI 12345678 not found' }
           }
+        },
+        Property: {
+          type: 'object',
+          properties: {
+            id: { type: 'integer', example: 1 },
+            direccion: { type: 'string', example: 'Calle 123 #45-67, Bogotá' },
+            tipo: { 
+              type: 'string', 
+              enum: ['casa', 'apartamento'], 
+              example: 'apartamento' 
+            },
+            valor_arriendo: { 
+              type: 'number', 
+              format: 'decimal',
+              example: 1500000.00 
+            },
+            estado: { 
+              type: 'string', 
+              enum: ['disponible', 'arrendada'], 
+              example: 'disponible' 
+            },
+            descripcion: { 
+              type: 'string', 
+              example: 'Apartamento de 2 habitaciones con vista panorámica' 
+            },
+            codigo_agua: {
+              type: 'string',
+              example: 'AGU12345678',
+              description: 'Código del servicio de agua'
+            },
+            codigo_luz: {
+              type: 'string',
+              example: 'LUZ87654321',
+              description: 'Código del servicio de electricidad'
+            },
+            codigo_gas: {
+              type: 'string',
+              example: 'GAS11223344',
+              description: 'Código del servicio de gas'
+            },
+            createdAt: { 
+              type: 'string', 
+              format: 'date-time',
+              example: '2025-01-15T10:30:00Z' 
+            },
+            updatedAt: { 
+              type: 'string', 
+              format: 'date-time',
+              example: '2025-01-15T10:30:00Z' 
+            }
+          }
+        },
+        CreateProperty: {
+          type: 'object',
+          required: ['direccion', 'tipo', 'valor_arriendo'],
+          properties: {
+            direccion: { 
+              type: 'string', 
+              example: 'Calle 123 #45-67, Bogotá',
+              minLength: 5,
+              maxLength: 255
+            },
+            tipo: { 
+              type: 'string', 
+              enum: ['casa', 'apartamento'], 
+              example: 'apartamento' 
+            },
+            valor_arriendo: { 
+              type: 'number', 
+              format: 'decimal',
+              example: 1500000.00,
+              minimum: 0.01
+            },
+            estado: { 
+              type: 'string', 
+              enum: ['disponible', 'arrendada'], 
+              example: 'disponible',
+              default: 'disponible'
+            },
+            descripcion: { 
+              type: 'string', 
+              example: 'Apartamento de 2 habitaciones con vista panorámica',
+              maxLength: 1000
+            },
+            codigo_agua: {
+              type: 'string',
+              example: 'AGU12345678',
+              description: 'Código del servicio de agua (opcional)',
+              minLength: 3,
+              maxLength: 50
+            },
+            codigo_luz: {
+              type: 'string',
+              example: 'LUZ87654321',
+              description: 'Código del servicio de electricidad (opcional)',
+              minLength: 3,
+              maxLength: 50
+            },
+            codigo_gas: {
+              type: 'string',
+              example: 'GAS11223344',
+              description: 'Código del servicio de gas (opcional)',
+              minLength: 3,
+              maxLength: 50
+            }
+          }
+        },
+        UpdateProperty: {
+          type: 'object',
+          properties: {
+            direccion: { 
+              type: 'string', 
+              example: 'Calle 456 #78-90, Medellín',
+              minLength: 5,
+              maxLength: 255
+            },
+            tipo: { 
+              type: 'string', 
+              enum: ['casa', 'apartamento'], 
+              example: 'casa' 
+            },
+            valor_arriendo: { 
+              type: 'number', 
+              format: 'decimal',
+              example: 2000000.00,
+              minimum: 0.01
+            },
+            estado: { 
+              type: 'string', 
+              enum: ['disponible', 'arrendada'], 
+              example: 'arrendada'
+            },
+            descripcion: { 
+              type: 'string', 
+              example: 'Casa de 3 habitaciones con jardín privado',
+              maxLength: 1000
+            },
+            codigo_agua: {
+              type: 'string',
+              example: 'AGU99887766',
+              description: 'Código del servicio de agua (opcional)',
+              minLength: 3,
+              maxLength: 50
+            },
+            codigo_luz: {
+              type: 'string',
+              example: 'LUZ55443322',
+              description: 'Código del servicio de electricidad (opcional)',
+              minLength: 3,
+              maxLength: 50
+            },
+            codigo_gas: {
+              type: 'string',
+              example: 'GAS77889900',
+              description: 'Código del servicio de gas (opcional)',
+              minLength: 3,
+              maxLength: 50
+            }
+          }
         }
       }
     }

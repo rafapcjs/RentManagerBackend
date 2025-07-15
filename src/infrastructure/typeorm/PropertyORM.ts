@@ -1,17 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-
-export enum PropertyStatus {
-  DISPONIBLE = 'disponible',
-  ARRENDADA = 'arrendada'
-}
-
-export enum PropertyType {
-  CASA = 'casa',
-  APARTAMENTO = 'apartamento',
-  OFICINA = 'oficina',
-  LOCAL = 'local',
-  BODEGA = 'bodega'
-}
+import { PropertyType, PropertyStatus } from '../../domain/constants/PropertyConstants';
 
 @Entity('propiedades')
 export class PropertyORM {
@@ -24,7 +12,7 @@ export class PropertyORM {
   @Column({ 
     type: 'enum', 
     enum: PropertyType,
-    default: PropertyType.APARTAMENTO 
+    default: PropertyType.CASA
   })
   tipo!: PropertyType;
 
@@ -34,12 +22,21 @@ export class PropertyORM {
   @Column({ 
     type: 'enum', 
     enum: PropertyStatus,
-    default: PropertyStatus.DISPONIBLE 
+    default: PropertyStatus.DISPONIBLE
   })
   estado!: PropertyStatus;
 
   @Column({ type: 'text', nullable: true })
   descripcion?: string;
+
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  codigo_agua?: string;
+
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  codigo_luz?: string;
+
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  codigo_gas?: string;
 
   @CreateDateColumn()
   createdAt!: Date;
