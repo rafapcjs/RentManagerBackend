@@ -1,4 +1,4 @@
-import { PropertyType, PropertyStatus } from "../../domain/constants/PropertyConstants";
+import { PropertyType, PropertyStatus } from "../../../domain/constants/PropertyConstants";
 
 // DTO for creating a new property
 export class CreatePropertyDto {
