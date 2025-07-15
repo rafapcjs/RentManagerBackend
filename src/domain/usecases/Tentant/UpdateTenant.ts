@@ -1,9 +1,9 @@
-import { ITentantRepository } from '../../../interfaces/repositories/ITentantRepository';
+import { ITenantRepository } from '../../../interfaces/repositories/ITenantRepository';
 import { Tenant } from '../../entities/Tenant';
 import { UpdateTenantDto } from '../../../application/dtos';
 
 export class UpdateTenant {
-  constructor(private repo: ITentantRepository) {}
+  constructor(private repo: ITenantRepository) {}
 
   async execute(dni: string, updateDto: UpdateTenantDto): Promise<Tenant> {
     if (!dni || dni.trim() === '') {

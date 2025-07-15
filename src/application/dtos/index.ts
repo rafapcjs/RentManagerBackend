@@ -1,24 +1,14 @@
 // Common DTOs
-export { PaginatedResponseDto } from './PaginatedResponseDto';
-export { PaginationDto } from './PaginationDto';
+export * from './common';
 
 // Tenant DTOs
-export { 
-  CreateTenantDto, 
-  UpdateTenantDto, 
-  TenantResponseDto 
-} from './TenantDtos';
+export * from './tenant';
 
 // Property DTOs
-export { 
-  CreatePropertyDto, 
-  UpdatePropertyDto, 
-  PropertyResponseDto 
-} from './PropertyDtos';
+export * from './property';
 
 // Contract DTOs
-export { 
-  CreateContractDto, 
-  UpdateContractDto, 
-  ContractResponseDto 
-} from './ContractDtos';
+export * from './contract';
+
+// Payment DTOs
+export * from './payment';
