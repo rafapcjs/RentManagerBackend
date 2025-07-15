@@ -18,7 +18,6 @@ class PropertyResponseDto {
     // Método estático para crear desde entidad de dominio
     static fromDomain(property) {
         return new PropertyResponseDto({
-            id: property.id,
             direccion: property.direccion,
             tipo: property.tipo,
             valor_arriendo: property.valor_arriendo,
@@ -26,15 +25,12 @@ class PropertyResponseDto {
             descripcion: property.descripcion,
             codigo_agua: property.codigo_agua,
             codigo_luz: property.codigo_luz,
-            codigo_gas: property.codigo_gas,
-            createdAt: property.createdAt,
-            updatedAt: property.updatedAt
+            codigo_gas: property.codigo_gas
         });
     }
     // Convertir a objeto plano para JSON
     toJSON() {
         return {
-            id: this.id,
             direccion: this.direccion,
             tipo: this.tipo,
             valor_arriendo: this.valor_arriendo,
@@ -42,9 +38,7 @@ class PropertyResponseDto {
             descripcion: this.descripcion,
             codigo_agua: this.codigo_agua,
             codigo_luz: this.codigo_luz,
-            codigo_gas: this.codigo_gas,
-            createdAt: this.createdAt,
-            updatedAt: this.updatedAt
+            codigo_gas: this.codigo_gas
         };
     }
 }

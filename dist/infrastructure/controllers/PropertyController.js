@@ -15,12 +15,12 @@ class PropertyController {
         this.updateProperty = new UpdateProperty_1.UpdateProperty(propertyRepository);
         this.deleteProperty = new DeleteProperty_1.DeleteProperty(propertyRepository);
     }
-    // GET /properties - Obtener todas las propiedades con paginación
+    // GET /properties - Get all properties with pagination
     async getAll(req, res) {
         try {
             const paginationOptions = req.pagination;
             const result = await this.getAllProperties.execute(paginationOptions);
-            // Convertir a DTOs de respuesta
+            // Convert to response DTOs
             const responseDto = dtos_1.PaginatedResponseDto.fromPaginatedResult(result, (property) => dtos_1.PropertyResponseDto.fromDomain(property));
             res.status(200).json({
                 success: true,
@@ -36,7 +36,7 @@ class PropertyController {
             });
         }
     }
-    // GET /properties/:id - Obtener propiedad por ID
+    // GET /properties/:id - Get property by ID
     async getById(req, res) {
         try {
             const id = parseInt(req.params.id);
@@ -55,7 +55,7 @@ class PropertyController {
                 });
                 return;
             }
-            // Convertir a DTO de respuesta
+            // Convert to response DTO
             const responseDto = dtos_1.PropertyResponseDto.fromDomain(property);
             res.status(200).json({
                 success: true,
@@ -71,13 +71,13 @@ class PropertyController {
             });
         }
     }
-    // POST /properties - Crear una nueva propiedad
+    // POST /properties - Create new property
     async create(req, res) {
         try {
-            // Validar el DTO de entrada
+            // Validate input DTO
             const createDto = dtos_1.CreatePropertyDto.fromRequest(req.body);
             const property = await this.createProperty.execute(createDto);
-            // Convertir a DTO de respuesta
+            // Convert to response DTO
             const responseDto = dtos_1.PropertyResponseDto.fromDomain(property);
             res.status(201).json({
                 success: true,
@@ -93,7 +93,7 @@ class PropertyController {
             });
         }
     }
-    // PUT /properties/:id - Actualizar propiedad
+    // PUT /properties/:id - Update property
     async update(req, res) {
         try {
             const id = parseInt(req.params.id);
@@ -104,10 +104,10 @@ class PropertyController {
                 });
                 return;
             }
-            // Validar el DTO de entrada
+            // Validate input DTO
             const updateDto = dtos_1.UpdatePropertyDto.fromRequest(req.body);
             const updatedProperty = await this.updateProperty.execute(id, updateDto);
-            // Convertir a DTO de respuesta
+            // Convert to response DTO
             const responseDto = dtos_1.PropertyResponseDto.fromDomain(updatedProperty);
             res.status(200).json({
                 success: true,
@@ -124,7 +124,7 @@ class PropertyController {
             });
         }
     }
-    // DELETE /properties/:id - Eliminar propiedad
+    // DELETE /properties/:id - Delete property
     async delete(req, res) {
         try {
             const id = parseInt(req.params.id);

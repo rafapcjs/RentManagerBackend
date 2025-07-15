@@ -10,9 +10,9 @@ const options = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Admi Arrendando API',
+            title: 'Rental Management API',
             version: '1.0.0',
-            description: 'API para gestión de inquilinos y arrendamientos',
+            description: 'API for tenant and rental management',
             contact: {
                 name: 'API Support',
                 email: 'support@admiarrendando.com'
@@ -21,27 +21,27 @@ const options = {
         servers: [
             {
                 url: 'http://localhost:3000/api',
-                description: 'Servidor de desarrollo'
+                description: 'Development server'
             }
         ],
         paths: {
             '/tenants': {
                 get: {
-                    summary: 'Obtener todos los inquilinos con paginación',
+                    summary: 'Get all tenants with pagination',
                     tags: ['Tenants'],
                     parameters: [
                         {
                             name: 'page',
                             in: 'query',
                             schema: { type: 'integer', minimum: 1, default: 1 },
-                            description: 'Número de página',
+                            description: 'Page number',
                             example: 1
                         },
                         {
                             name: 'limit',
                             in: 'query',
                             schema: { type: 'integer', minimum: 1, maximum: 100, default: 10 },
-                            description: 'Número de elementos por página (máximo 100)',
+                            description: 'Number of items per page (maximum 100)',
                             example: 10
                         },
                         {
@@ -52,7 +52,7 @@ const options = {
                                 enum: ['id', 'fullName', 'dni', 'numberPhone'],
                                 default: 'id'
                             },
-                            description: 'Campo por el cual ordenar',
+                            description: 'Field to sort by',
                             example: 'fullName'
                         },
                         {
@@ -63,13 +63,13 @@ const options = {
                                 enum: ['ASC', 'DESC'],
                                 default: 'ASC'
                             },
-                            description: 'Orden de clasificación',
+                            description: 'Sort order',
                             example: 'ASC'
                         }
                     ],
                     responses: {
                         '200': {
-                            description: 'Lista de inquilinos obtenida exitosamente',
+                            description: 'Tenants list retrieved successfully',
                             content: {
                                 'application/json': {
                                     schema: {
@@ -98,7 +98,7 @@ const options = {
                     }
                 },
                 post: {
-                    summary: 'Crear nuevo inquilino',
+                    summary: 'Create new tenant',
                     tags: ['Tenants'],
                     requestBody: {
                         required: true,
@@ -110,7 +110,7 @@ const options = {
                     },
                     responses: {
                         '201': {
-                            description: 'Inquilino creado exitosamente',
+                            description: 'Tenant created successfully',
                             content: {
                                 'application/json': {
                                     schema: {
@@ -137,7 +137,7 @@ const options = {
             },
             '/tenants/{dni}': {
                 get: {
-                    summary: 'Obtener inquilino por DNI',
+                    summary: 'Get tenant by DNI',
                     tags: ['Tenants'],
                     parameters: [
                         {
@@ -145,13 +145,13 @@ const options = {
                             in: 'path',
                             required: true,
                             schema: { type: 'string', pattern: '^\\d{7,10}$' },
-                            description: 'DNI del inquilino',
+                            description: 'Tenant\'s DNI',
                             example: '12345678'
                         }
                     ],
                     responses: {
                         '200': {
-                            description: 'Inquilino encontrado',
+                            description: 'Tenant found',
                             content: {
                                 'application/json': {
                                     schema: {
@@ -166,7 +166,7 @@ const options = {
                             }
                         },
                         '404': {
-                            description: 'Inquilino no encontrado',
+                            description: 'Tenant not found',
                             content: {
                                 'application/json': {
                                     schema: { $ref: '#/components/schemas/NotFoundError' }
@@ -176,7 +176,7 @@ const options = {
                     }
                 },
                 put: {
-                    summary: 'Actualizar inquilino',
+                    summary: 'Update tenant',
                     tags: ['Tenants'],
                     parameters: [
                         {
@@ -184,7 +184,7 @@ const options = {
                             in: 'path',
                             required: true,
                             schema: { type: 'string', pattern: '^\\d{7,10}$' },
-                            description: 'DNI del inquilino',
+                            description: 'Tenant\'s DNI',
                             example: '12345678'
                         }
                     ],
@@ -198,7 +198,7 @@ const options = {
                     },
                     responses: {
                         '200': {
-                            description: 'Inquilino actualizado exitosamente',
+                            description: 'Tenant updated successfully',
                             content: {
                                 'application/json': {
                                     schema: {
@@ -213,7 +213,7 @@ const options = {
                             }
                         },
                         '404': {
-                            description: 'Inquilino no encontrado',
+                            description: 'Tenant not found',
                             content: {
                                 'application/json': {
                                     schema: { $ref: '#/components/schemas/NotFoundError' }
@@ -223,7 +223,7 @@ const options = {
                     }
                 },
                 delete: {
-                    summary: 'Eliminar inquilino',
+                    summary: 'Delete tenant',
                     tags: ['Tenants'],
                     parameters: [
                         {
@@ -231,13 +231,13 @@ const options = {
                             in: 'path',
                             required: true,
                             schema: { type: 'string', pattern: '^\\d{7,10}$' },
-                            description: 'DNI del inquilino',
+                            description: 'Tenant\'s DNI',
                             example: '12345678'
                         }
                     ],
                     responses: {
                         '200': {
-                            description: 'Inquilino eliminado exitosamente',
+                            description: 'Tenant deleted successfully',
                             content: {
                                 'application/json': {
                                     schema: {
@@ -251,7 +251,7 @@ const options = {
                             }
                         },
                         '404': {
-                            description: 'Inquilino no encontrado',
+                            description: 'Tenant not found',
                             content: {
                                 'application/json': {
                                     schema: { $ref: '#/components/schemas/NotFoundError' }
@@ -501,12 +501,12 @@ const setupSwagger = (app) => {
             tryItOutEnabled: true
         }
     }));
-    // Endpoint para obtener la especificación JSON
+    // Endpoint to get JSON specification
     app.get('/api-docs.json', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(specs);
     });
-    console.log('📚 Swagger UI interactivo disponible en http://localhost:3000/api-docs');
-    console.log('📄 Especificación JSON en http://localhost:3000/api-docs.json');
+    console.log('📚 Interactive Swagger UI available at http://localhost:3000/api-docs');
+    console.log('📄 JSON specification at http://localhost:3000/api-docs.json');
 };
 exports.setupSwagger = setupSwagger;

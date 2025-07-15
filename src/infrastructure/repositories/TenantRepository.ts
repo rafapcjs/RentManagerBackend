@@ -1,12 +1,12 @@
 import { AppDataSource } from '../../config/data-source';
 import { Tenant } from '../../domain/entities/Tenant';
-import { ITentantRepository } from '../../interfaces/repositories/ITentantRepository';
+import { ITenantRepository } from '../../interfaces/repositories/ITenantRepository';
 import { PaginationOptions, PaginatedResult } from '../../interfaces/common/Pagination';
-import { TentantORM } from '../typeorm/TentantORM';
+import { TenantORM } from '../typeorm/TenantORM';
  
 
-export class TenantRepository implements ITentantRepository {
-  private repo = AppDataSource.getRepository(TentantORM);
+export class TenantRepository implements ITenantRepository {
+  private repo = AppDataSource.getRepository(TenantORM);
 
   async getAll(options?: PaginationOptions): Promise<PaginatedResult<Tenant>> {
     // Valores por defecto para la paginación

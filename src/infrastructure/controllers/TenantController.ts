@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { GetAllTenants } from '../../domain/usecases/Tentant/GetAllTenants';
-import { GetTenantByDni } from '../../domain/usecases/Tentant/GetTenantByDni';
-import { CreateTenant } from '../../domain/usecases/Tentant/CreateTenant';
-import { UpdateTenant } from '../../domain/usecases/Tentant/UpdateTenant';
-import { DeleteTenant } from '../../domain/usecases/Tentant/DeleteTenant';
-import { ITentantRepository } from '../../interfaces/repositories/ITentantRepository';
+import { GetAllTenants } from '../../domain/usecases/Tenant/GetAllTenants';
+import { GetTenantByDni } from '../../domain/usecases/Tenant/GetTenantByDni';
+import { CreateTenant } from '../../domain/usecases/Tenant/CreateTenant';
+import { UpdateTenant } from '../../domain/usecases/Tenant/UpdateTenant';
+import { DeleteTenant } from '../../domain/usecases/Tenant/DeleteTenant';
+import { ITenantRepository } from '../../interfaces/repositories/ITenantRepository';
 import { 
   CreateTenantDto, 
   UpdateTenantDto, 
@@ -19,7 +19,7 @@ export class TenantController {
   private updateTenant: UpdateTenant;
   private deleteTenant: DeleteTenant;
 
-  constructor(tenantRepository: ITentantRepository) {
+  constructor(tenantRepository: ITenantRepository) {
     this.getAllTenants = new GetAllTenants(tenantRepository);
     this.getTenantByDni = new GetTenantByDni(tenantRepository);
     this.createTenant = new CreateTenant(tenantRepository);
@@ -33,7 +33,7 @@ export class TenantController {
       const paginationOptions = req.pagination;
       const result = await this.getAllTenants.execute(paginationOptions);
       
-      // Convertir a DTOs de respuesta
+      // Convert to response DTOs
       const responseDto = PaginatedResponseDto.fromPaginatedResult(
         result,
         (tenant: any) => TenantResponseDto.fromDomain(tenant)
@@ -53,7 +53,7 @@ export class TenantController {
     }
   }
 
-  // GET /tenants/:dni - Obtener inquilino por DNI
+  // GET /tenants/:dni - Get tenant by DNI
   async getByDni(req: Request, res: Response): Promise<void> {
     try {
       const { dni } = req.params;
@@ -67,7 +67,7 @@ export class TenantController {
         return;
       }
 
-      // Convertir a DTO de respuesta
+      // Convert to response DTO
       const responseDto = TenantResponseDto.fromDomain(tenant);
 
       res.status(200).json({
@@ -84,7 +84,7 @@ export class TenantController {
     }
   }
 
-  // POST /tenants - Crear un nuevo inquilino
+  // POST /tenants - Create new tenant
   async create(req: Request, res: Response): Promise<void> {
     try {
       // Validar el DTO de entrada
@@ -92,7 +92,7 @@ export class TenantController {
       
       const tenant = await this.createTenant.execute(createDto);
       
-      // Convertir a DTO de respuesta
+      // Convert to response DTO
       const responseDto = TenantResponseDto.fromDomain(tenant);
       
       res.status(201).json({
@@ -109,7 +109,7 @@ export class TenantController {
     }
   }
 
-  // PUT /tenants/:dni - Actualizar inquilino
+  // PUT /tenants/:dni - Update tenant
   async update(req: Request, res: Response): Promise<void> {
     try {
       const { dni } = req.params;
@@ -119,7 +119,7 @@ export class TenantController {
       
       const updatedTenant = await this.updateTenant.execute(dni, updateDto);
       
-      // Convertir a DTO de respuesta
+      // Convert to response DTO
       const responseDto = TenantResponseDto.fromDomain(updatedTenant);
       
       res.status(200).json({
@@ -137,7 +137,7 @@ export class TenantController {
     }
   }
 
-  // DELETE /tenants/:dni - Eliminar inquilino
+  // DELETE /tenants/:dni - Delete tenant
   async delete(req: Request, res: Response): Promise<void> {
     try {
       const { dni } = req.params;

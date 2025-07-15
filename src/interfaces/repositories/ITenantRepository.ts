@@ -1,7 +1,7 @@
 import { Tenant } from "../../domain/entities/Tenant";
 import { PaginationOptions, PaginatedResult } from "../common/Pagination";
 
-export interface ITentantRepository {
+export interface ITenantRepository {
   getAll(options?: PaginationOptions): Promise<PaginatedResult<Tenant>>;
   getByDni(dni: string): Promise<Tenant | null>;
   create(tenant: Tenant): Promise<Tenant>;

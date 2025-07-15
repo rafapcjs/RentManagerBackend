@@ -27,13 +27,13 @@ export class PropertyController {
     this.deleteProperty = new DeleteProperty(propertyRepository);
   }
 
-  // GET /properties - Obtener todas las propiedades con paginación
+  // GET /properties - Get all properties with pagination
   async getAll(req: Request, res: Response): Promise<void> {
     try {
       const paginationOptions = req.pagination;
       const result = await this.getAllProperties.execute(paginationOptions);
       
-      // Convertir a DTOs de respuesta
+      // Convert to response DTOs
       const responseDto = PaginatedResponseDto.fromPaginatedResult(
         result,
         (property: any) => PropertyResponseDto.fromDomain(property)
@@ -53,7 +53,7 @@ export class PropertyController {
     }
   }
 
-  // GET /properties/:id - Obtener propiedad por ID
+  // GET /properties/:id - Get property by ID
   async getById(req: Request, res: Response): Promise<void> {
     try {
       const id = parseInt(req.params.id);
@@ -76,7 +76,7 @@ export class PropertyController {
         return;
       }
 
-      // Convertir a DTO de respuesta
+      // Convert to response DTO
       const responseDto = PropertyResponseDto.fromDomain(property);
 
       res.status(200).json({
@@ -93,15 +93,15 @@ export class PropertyController {
     }
   }
 
-  // POST /properties - Crear una nueva propiedad
+  // POST /properties - Create new property
   async create(req: Request, res: Response): Promise<void> {
     try {
-      // Validar el DTO de entrada
+      // Validate input DTO
       const createDto = CreatePropertyDto.fromRequest(req.body);
       
       const property = await this.createProperty.execute(createDto);
       
-      // Convertir a DTO de respuesta
+      // Convert to response DTO
       const responseDto = PropertyResponseDto.fromDomain(property);
       
       res.status(201).json({
@@ -118,7 +118,7 @@ export class PropertyController {
     }
   }
 
-  // PUT /properties/:id - Actualizar propiedad
+  // PUT /properties/:id - Update property
   async update(req: Request, res: Response): Promise<void> {
     try {
       const id = parseInt(req.params.id);
@@ -131,12 +131,12 @@ export class PropertyController {
         return;
       }
       
-      // Validar el DTO de entrada
+      // Validate input DTO
       const updateDto = UpdatePropertyDto.fromRequest(req.body);
       
       const updatedProperty = await this.updateProperty.execute(id, updateDto);
       
-      // Convertir a DTO de respuesta
+      // Convert to response DTO
       const responseDto = PropertyResponseDto.fromDomain(updatedProperty);
       
       res.status(200).json({
@@ -154,7 +154,7 @@ export class PropertyController {
     }
   }
 
-  // DELETE /properties/:id - Eliminar propiedad
+  // DELETE /properties/:id - Delete property
   async delete(req: Request, res: Response): Promise<void> {
     try {
       const id = parseInt(req.params.id);

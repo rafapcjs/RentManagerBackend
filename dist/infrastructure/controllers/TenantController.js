@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TenantController = void 0;
-const GetAllTenants_1 = require("../../domain/usecases/Tentant/GetAllTenants");
-const GetTenantByDni_1 = require("../../domain/usecases/Tentant/GetTenantByDni");
-const CreateTenant_1 = require("../../domain/usecases/Tentant/CreateTenant");
-const UpdateTenant_1 = require("../../domain/usecases/Tentant/UpdateTenant");
-const DeleteTenant_1 = require("../../domain/usecases/Tentant/DeleteTenant");
+const GetAllTenants_1 = require("../../domain/usecases/Tenant/GetAllTenants");
+const GetTenantByDni_1 = require("../../domain/usecases/Tenant/GetTenantByDni");
+const CreateTenant_1 = require("../../domain/usecases/Tenant/CreateTenant");
+const UpdateTenant_1 = require("../../domain/usecases/Tenant/UpdateTenant");
+const DeleteTenant_1 = require("../../domain/usecases/Tenant/DeleteTenant");
 const dtos_1 = require("../../application/dtos");
 class TenantController {
     constructor(tenantRepository) {
@@ -20,7 +20,7 @@ class TenantController {
         try {
             const paginationOptions = req.pagination;
             const result = await this.getAllTenants.execute(paginationOptions);
-            // Convertir a DTOs de respuesta
+            // Convert to response DTOs
             const responseDto = dtos_1.PaginatedResponseDto.fromPaginatedResult(result, (tenant) => dtos_1.TenantResponseDto.fromDomain(tenant));
             res.status(200).json({
                 success: true,
@@ -36,7 +36,7 @@ class TenantController {
             });
         }
     }
-    // GET /tenants/:dni - Obtener inquilino por DNI
+    // GET /tenants/:dni - Get tenant by DNI
     async getByDni(req, res) {
         try {
             const { dni } = req.params;
@@ -48,7 +48,7 @@ class TenantController {
                 });
                 return;
             }
-            // Convertir a DTO de respuesta
+            // Convert to response DTO
             const responseDto = dtos_1.TenantResponseDto.fromDomain(tenant);
             res.status(200).json({
                 success: true,
@@ -64,13 +64,13 @@ class TenantController {
             });
         }
     }
-    // POST /tenants - Crear un nuevo inquilino
+    // POST /tenants - Create new tenant
     async create(req, res) {
         try {
             // Validar el DTO de entrada
             const createDto = dtos_1.CreateTenantDto.fromRequest(req.body);
             const tenant = await this.createTenant.execute(createDto);
-            // Convertir a DTO de respuesta
+            // Convert to response DTO
             const responseDto = dtos_1.TenantResponseDto.fromDomain(tenant);
             res.status(201).json({
                 success: true,
@@ -86,14 +86,14 @@ class TenantController {
             });
         }
     }
-    // PUT /tenants/:dni - Actualizar inquilino
+    // PUT /tenants/:dni - Update tenant
     async update(req, res) {
         try {
             const { dni } = req.params;
             // Validar el DTO de entrada
             const updateDto = dtos_1.UpdateTenantDto.fromRequest(req.body);
             const updatedTenant = await this.updateTenant.execute(dni, updateDto);
-            // Convertir a DTO de respuesta
+            // Convert to response DTO
             const responseDto = dtos_1.TenantResponseDto.fromDomain(updatedTenant);
             res.status(200).json({
                 success: true,
@@ -110,7 +110,7 @@ class TenantController {
             });
         }
     }
-    // DELETE /tenants/:dni - Eliminar inquilino
+    // DELETE /tenants/:dni - Delete tenant
     async delete(req, res) {
         try {
             const { dni } = req.params;

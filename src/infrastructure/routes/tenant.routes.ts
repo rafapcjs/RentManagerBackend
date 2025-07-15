@@ -14,30 +14,20 @@ const router = Router();
 const tenantRepository = new TenantRepository();
 const tenantController = new TenantController(tenantRepository);
 
-// Rutas para inquilinos/tenants
-// GET /api/tenants - Obtener todos los inquilinos con paginación
-router.get('/', validatePagination, async (req, res) => {
-  await tenantController.getAll(req, res);
-});
+// Main routes
+// GET /api/tenants - Get all tenants with pagination
+router.get('/', validatePagination, tenantController.getAll.bind(tenantController));
 
-// GET /api/tenants/:dni - Obtener inquilino por DNI
-router.get('/:dni', validateDniParam, async (req, res) => {
-  await tenantController.getByDni(req, res);
-});
+// GET /api/tenants/:dni - Get tenant by DNI
+router.get('/:dni', validateDniParam, tenantController.getByDni.bind(tenantController));
 
-// POST /api/tenants - Crear nuevo inquilino
-router.post('/', validateCreateTenant, async (req, res) => {
-  await tenantController.create(req, res);
-});
+// POST /api/tenants - Create new tenant
+router.post('/', validateCreateTenant, tenantController.create.bind(tenantController));
 
-// PUT /api/tenants/:dni - Actualizar inquilino
-router.put('/:dni', validateDniParam, validateUpdateTenant, async (req, res) => {
-  await tenantController.update(req, res);
-});
+// PUT /api/tenants/:dni - Update tenant
+router.put('/:dni', validateDniParam, validateUpdateTenant, tenantController.update.bind(tenantController));
 
-// DELETE /api/tenants/:dni - Eliminar inquilino
-router.delete('/:dni', validateDniParam, async (req, res) => {
-  await tenantController.delete(req, res);
-});
+// DELETE /api/tenants/:dni - Delete tenant
+router.delete('/:dni', validateDniParam, tenantController.delete.bind(tenantController));
 
 export default router;

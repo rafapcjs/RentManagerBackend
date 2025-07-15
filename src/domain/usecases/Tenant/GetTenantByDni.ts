@@ -1,8 +1,8 @@
-import { ITentantRepository } from '../../../interfaces/repositories/ITentantRepository';
+import { ITenantRepository } from '../../../interfaces/repositories/ITenantRepository';
 import { Tenant } from '../../entities/Tenant';
 
 export class GetTenantByDni {
-  constructor(private repo: ITentantRepository) {}
+  constructor(private repo: ITenantRepository) {}
 
   async execute(dni: string): Promise<Tenant | null> {
     if (!dni || dni.trim() === '') {

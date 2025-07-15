@@ -1,9 +1,9 @@
-import { ITentantRepository } from '../../../interfaces/repositories/ITentantRepository';
+import { ITenantRepository } from '../../../interfaces/repositories/ITenantRepository';
 import { Tenant } from '../../entities/Tenant';
-import { CreateTenantDto } from '../../../application/dtos/CreateTenantDto';
+import { CreateTenantDto } from '../../../application/dtos';
 
 export class CreateTenant {
-  constructor(private repo: ITentantRepository) {}
+  constructor(private repo: ITenantRepository) {}
 
   async execute(createDto: CreateTenantDto): Promise<Tenant> {
     // Las validaciones ya se realizan en el DTO
@@ -19,3 +19,4 @@ export class CreateTenant {
     return this.repo.create(tenant);
   }
 }
+

@@ -1,9 +1,9 @@
-import { ITentantRepository } from '../../../interfaces/repositories/ITentantRepository';
+import { ITenantRepository } from '../../../interfaces/repositories/ITenantRepository';
 import { PaginationOptions, PaginatedResult } from '../../../interfaces/common/Pagination';
 import { Tenant } from '../../entities/Tenant';
 
 export class GetAllTenants {
-  constructor(private repo: ITentantRepository) {}
+  constructor(private repo: ITenantRepository) {}
 
   async execute(options?: PaginationOptions): Promise<PaginatedResult<Tenant>> {
     // Validaciones

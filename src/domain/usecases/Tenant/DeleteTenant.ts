@@ -1,7 +1,7 @@
-import { ITentantRepository } from '../../../interfaces/repositories/ITentantRepository';
+import { ITenantRepository } from '../../../interfaces/repositories/ITenantRepository';
 
 export class DeleteTenant {
-  constructor(private repo: ITentantRepository) {}
+  constructor(private repo: ITenantRepository) {}
 
   async execute(dni: string): Promise<void> {
     if (!dni || dni.trim() === '') {

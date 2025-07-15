@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TenantRepository = void 0;
 const data_source_1 = require("../../config/data-source");
 const Tenant_1 = require("../../domain/entities/Tenant");
-const TentantORM_1 = require("../typeorm/TentantORM");
+const TenantORM_1 = require("../typeorm/TenantORM");
 class TenantRepository {
     constructor() {
-        this.repo = data_source_1.AppDataSource.getRepository(TentantORM_1.TentantORM);
+        this.repo = data_source_1.AppDataSource.getRepository(TenantORM_1.TenantORM);
     }
     async getAll(options) {
         // Valores por defecto para la paginación

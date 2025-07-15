@@ -1,6 +1,6 @@
 import { IPropertyRepository } from '../../../interfaces/repositories/IPropertyRepository';
 import { Property } from '../../entities/Property';
-import { UpdatePropertyDto } from '../../../application/dtos/UpdatePropertyDto';
+import { UpdatePropertyDto } from '../../../application/dtos';
 
 export class UpdateProperty {
   constructor(private repo: IPropertyRepository) {}
